@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<Database>
+   <Name>cas_note</Name>
+   <Table>
+      <Name>professeur</Name>
+      <Comment>salle de classe</Comment>
+      <Column>
+         <Name>nom_professeur</Name>
+         <Type>VARCHAR(30)</Type>
+         <Comment>nom professeur</Comment>
+      </Column>
+      <Column>
+         <Name>num_salle</Name>
+         <Type>INT</Type>
+         <Property>NOT NULL</Property>
+      </Column>
+      <Column>
+         <Name>nb_heure</Name>
+         <Type>INT</Type>
+         <Property>NOT NULL</Property>
+      </Column>
+      <PK>
+         <Key>nom_professeur</Key>
+      </PK>
+   </Table>
+   <Table>
+      <Name>eleve</Name>
+      <Column>
+         <Name>nom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+      </Column>
+      <Column>
+         <Name>prenom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+      </Column>
+      <PK>
+         <Key>nom_eleve, prenom_eleve</Key>
+      </PK>
+   </Table>
+   <Table>
+      <Name>mati&#233;re</Name>
+      <Column>
+         <Name>m_nom</Name>
+         <Type>VARCHAR(30)</Type>
+      </Column>
+      <Column>
+         <Name>nom_professeur</Name>
+         <Type>VARCHAR(30)</Type>
+         <Property>NOT NULL</Property>
+      </Column>
+      <PK>
+         <Key>m_nom</Key>
+      </PK>
+      <FK>
+         <Key>nom_professeur</Key>
+         <Reference>professeur(nom_professeur)</Reference>
+      </FK>
+   </Table>
+   <Table>
+      <Name>classe</Name>
+      <Column>
+         <Name>nom_classe</Name>
+         <Type>VARCHAR(30)</Type>
+      </Column>
+      <Column>
+         <Name>num_salle</Name>
+         <Type>INT</Type>
+      </Column>
+      <Column>
+         <Name>nom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+         <Property>NOT NULL</Property>
+      </Column>
+      <Column>
+         <Name>prenom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+         <Property>NOT NULL</Property>
+      </Column>
+      <PK>
+         <Key>nom_classe</Key>
+      </PK>
+      <FK>
+         <Key>nom_eleve, prenom_eleve</Key>
+         <Reference>eleve(nom_eleve, prenom_eleve)</Reference>
+      </FK>
+   </Table>
+   <Table>
+      <Name>noter</Name>
+      <Column>
+         <Name>nom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+      </Column>
+      <Column>
+         <Name>prenom_eleve</Name>
+         <Type>VARCHAR(20)</Type>
+      </Column>
+      <Column>
+         <Name>m_nom</Name>
+         <Type>VARCHAR(30)</Type>
+      </Column>
+      <Column>
+         <Name>note</Name>
+         <Type>INT</Type>
+      </Column>
+      <PK>
+         <Key>nom_eleve, prenom_eleve, m_nom</Key>
+      </PK>
+      <FK>
+         <Key>nom_eleve, prenom_eleve</Key>
+         <Reference>eleve(nom_eleve, prenom_eleve)</Reference>
+      </FK>
+      <FK>
+         <Key>m_nom</Key>
+         <Reference>mati&#233;re(m_nom)</Reference>
+      </FK>
+   </Table>
+   <Table>
+      <Name>enseigner</Name>
+      <Column>
+         <Name>m_nom</Name>
+         <Type>VARCHAR(30)</Type>
+      </Column>
+      <Column>
+         <Name>nom_classe</Name>
+         <Type>VARCHAR(30)</Type>
+      </Column>
+      <Column>
+         <Name>nbr</Name>
+         <Type>INT</Type>
+      </Column>
+      <PK>
+         <Key>m_nom, nom_classe</Key>
+      </PK>
+      <FK>
+         <Key>m_nom</Key>
+         <Reference>mati&#233;re(m_nom)</Reference>
+      </FK>
+      <FK>
+         <Key>nom_classe</Key>
+         <Reference>classe(nom_classe)</Reference>
+      </FK>
+   </Table>
+</Database>

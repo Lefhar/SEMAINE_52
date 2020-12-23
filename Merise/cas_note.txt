@@ -1,0 +1,51 @@
+Sub Create_Tables()
+
+DoCmd.RunSQL "CREATE TABLE professeur(" & _
+   "nom_professeur VARCHAR(30)," & _
+   "num_salle INT NOT NULL," & _
+   "nb_heure INT NOT NULL," & _
+   "PRIMARY KEY(nom_professeur)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE eleve(" & _
+   "nom_eleve VARCHAR(20)," & _
+   "prenom_eleve VARCHAR(20)," & _
+   "PRIMARY KEY(nom_eleve, prenom_eleve)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE matiére(" & _
+   "m_nom VARCHAR(30)," & _
+   "nom_professeur VARCHAR(30) NOT NULL," & _
+   "PRIMARY KEY(m_nom)," & _
+   "FOREIGN KEY(nom_professeur) REFERENCES professeur(nom_professeur)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE classe(" & _
+   "nom_classe VARCHAR(30)," & _
+   "num_salle INT," & _
+   "nom_eleve VARCHAR(20) NOT NULL," & _
+   "prenom_eleve VARCHAR(20) NOT NULL," & _
+   "PRIMARY KEY(nom_classe)," & _
+   "FOREIGN KEY(nom_eleve, prenom_eleve) REFERENCES eleve(nom_eleve, prenom_eleve)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE noter(" & _
+   "nom_eleve VARCHAR(20)," & _
+   "prenom_eleve VARCHAR(20)," & _
+   "m_nom VARCHAR(30)," & _
+   "note INT," & _
+   "PRIMARY KEY(nom_eleve, prenom_eleve, m_nom)," & _
+   "FOREIGN KEY(nom_eleve, prenom_eleve) REFERENCES eleve(nom_eleve, prenom_eleve)," & _
+   "FOREIGN KEY(m_nom) REFERENCES matiére(m_nom)" & _
+");"   
+
+DoCmd.RunSQL "CREATE TABLE enseigner(" & _
+   "m_nom VARCHAR(30)," & _
+   "nom_classe VARCHAR(30)," & _
+   "nbr INT," & _
+   "PRIMARY KEY(m_nom, nom_classe)," & _
+   "FOREIGN KEY(m_nom) REFERENCES matiére(m_nom)," & _
+   "FOREIGN KEY(nom_classe) REFERENCES classe(nom_classe)" & _
+");"   
+
+End Sub
