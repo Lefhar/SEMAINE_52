@@ -57,4 +57,33 @@ echo "Exercice 4.4<br>
         echo "sa vous coûtera ".$resufinal." euro"; 
     }
     echo "<hr>";
+echo "Exercice 4.5
+    Les habitants de Zorglub paient l’impôt selon les règles suivantes :
+    les hommes de plus de 20 ans paient l’impôt
+    les femmes paient l’impôt si elles ont entre 18 et 35 ans
+    les autres ne paient pas d’impôt
+    Le programme demandera donc l’âge et le sexe du Zorglubien, et se prononcera donc ensuite sur le fait que l’habitant est imposable.
+    <form method=\"POST\" action=\"\">
+    <label for=\"age\" >Entrer votre âge</label><br>
+    <input type=\"number\" name=\"age\" ><br>
+    Vous êtres ?
+    <label for=\"h\" >un homme </label>
+    <input type=\"radio\" name=\"sex\" id=\"h\"value=\"Homme\">
+    <label for=\"f\" >une femme </label>
+    <input type=\"radio\" name=\"sex\" id=\"f\"value=\"femme\"><br>
+    <button type=\"submit\">Envoyer</button>
+    </form><br>";
+
+if(!empty($_POST['sex'])&&!empty($_POST['age']))
+    {
+    //si c'est un homme est que sont âge est supérieur à 20 ans alors il paye
+    if($_POST['sex'] =="Homme"&& $_POST['age']  > 20){
+    echo "vous payez des impôts";
+    }else if($_POST['sex'] =="femme"&& $_POST['age'] >= 18 && $_POST['age'] <=35){// si sont âge est compris entre 18 et 35 et c'est une femme paye pas
+        echo "vous payez des impôts";
+    }else{//tout les autres ne paye pas d'impôt
+        echo "vous payez pas d'impôts";
+    }
+}
+    echo "<hr>";
 ?>
